@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default id => () => (
+const fn = (id) => () => (
   <iframe
     src={`https://codesandbox.io/embed/${id}?autoresize=1&hidenavigation=1&view=${
       global.innerWidth < 1000 ? 'preview' : 'split'
@@ -18,3 +18,5 @@ export default id => () => (
     title="Code Sandbox"
   />
 )
+
+export default fn

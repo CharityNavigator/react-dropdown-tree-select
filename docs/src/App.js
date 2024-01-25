@@ -46,7 +46,7 @@ const App = () => (
       height: '100%',
     }}
     pathPrefix="story/"
-    Story={props => (
+    Story={(props) => (
       <defaultProps.StoryWrapper
         css={{
           padding: 0,

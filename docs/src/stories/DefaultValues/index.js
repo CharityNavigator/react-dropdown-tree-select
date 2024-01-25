@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import DropdownTreeSelect from '../../../../src'
 import '../../../../dist/styles.css'
@@ -12,7 +12,7 @@ const onChange = (curNode, selectedNodes, all) => {
 const onAction = (node, action) => {
   console.log('onAction::', action, node)
 }
-const onNodeToggle = curNode => {
+const onNodeToggle = (curNode) => {
   console.log('onNodeToggle::', curNode)
 }
 

@@ -11,7 +11,7 @@ const onChange = (curNode, selectedNodes) => {
 const onAction = (node, action) => {
   console.log('onAction::', action, node)
 }
-const onNodeToggle = curNode => {
+const onNodeToggle = (curNode) => {
   console.log('onNodeToggle::', curNode)
 }
 

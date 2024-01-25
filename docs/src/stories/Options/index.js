@@ -31,11 +31,11 @@ class WithOptions extends PureComponent {
   onAction = (node, action) => {
     console.log('onAction::', action, node)
   }
-  onNodeToggle = curNode => {
+  onNodeToggle = (curNode) => {
     console.log('onNodeToggle::', curNode)
   }
 
-  onOptionsChange = value => {
+  onOptionsChange = (value) => {
     this.setState({ [value]: !this.state[value] })
   }
 
@@ -68,7 +68,7 @@ class WithOptions extends PureComponent {
         >
           <div style={{ marginBottom: '10px' }}>
             <label htmlFor={mode}>Mode: </label>
-            <select id="mode" value={mode} onChange={e => this.setState({ mode: e.target.value })}>
+            <select id="mode" value={mode} onChange={(e) => this.setState({ mode: e.target.value })}>
               <option value="multiSelect">Multi select</option>
               <option value="simpleSelect">Simple select</option>
               <option value="radioSelect">Radio select</option>
@@ -80,7 +80,7 @@ class WithOptions extends PureComponent {
             <select
               id="showDropdown"
               value={showDropdown}
-              onChange={e => this.setState({ showDropdown: e.target.value })}
+              onChange={(e) => this.setState({ showDropdown: e.target.value })}
             >
               <option value="default">--</option>
               <option value="initial">Initial</option>
@@ -93,7 +93,7 @@ class WithOptions extends PureComponent {
               id="placeholder"
               type="text"
               value={placeholder}
-              onChange={e => this.setState({ placeholder: e.target.value })}
+              onChange={(e) => this.setState({ placeholder: e.target.value })}
             />
           </div>
           <div style={{ marginBottom: '10px' }}>
@@ -102,7 +102,7 @@ class WithOptions extends PureComponent {
               id="inlineSearchPlaceholder"
               type="text"
               value={inlineSearchPlaceholder}
-              onChange={e => this.setState({ inlineSearchPlaceholder: e.target.value })}
+              onChange={(e) => this.setState({ inlineSearchPlaceholder: e.target.value })}
             />
           </div>
           <Checkbox
