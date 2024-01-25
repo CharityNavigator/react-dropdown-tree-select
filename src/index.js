@@ -81,7 +81,7 @@ class DropdownTreeSelect extends Component {
       rootPrefixId: this.clientId,
       searchPredicate,
     })
-    this.setState(prevState => {
+    this.setState((prevState) => {
       const currentFocusNode = prevState.currentFocus && this.treeManager.getNodeById(prevState.currentFocus)
       if (currentFocusNode) {
         currentFocusNode._focused = true
@@ -106,7 +106,7 @@ class DropdownTreeSelect extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.initNewProps(this.props)
   }
 
@@ -119,7 +119,7 @@ class DropdownTreeSelect extends Component {
   }
 
   handleClick = (e, callback) => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       // keep dropdown active when typing in search box
       const showDropdown = this.props.showDropdown === 'always' || this.keepDropdownActive || !prevState.showDropdown
 
@@ -139,7 +139,7 @@ class DropdownTreeSelect extends Component {
     }, callback)
   }
 
-  handleOutsideClick = e => {
+  handleOutsideClick = (e) => {
     if (this.props.showDropdown === 'always' || !isOutsideClick(e, this.node)) {
       return
     }
@@ -147,7 +147,7 @@ class DropdownTreeSelect extends Component {
     this.handleClick()
   }
 
-  onInputChange = value => {
+  onInputChange = (value) => {
     const { allNodesHidden, tree } = this.treeManager.filterTree(
       value,
       this.props.keepTreeOnSearch,
@@ -164,14 +164,14 @@ class DropdownTreeSelect extends Component {
 
   onTagRemove = (id, isKeyboardEvent) => {
     const { tags: prevTags } = this.state
-    this.onCheckboxChange(id, false, tags => {
+    this.onCheckboxChange(id, false, (tags) => {
       if (!isKeyboardEvent) return
 
       keyboardNavigation.getNextFocusAfterTagDelete(id, prevTags, tags, this.searchInput).focus()
     })
   }
 
-  onNodeToggle = id => {
+  onNodeToggle = (id) => {
     this.treeManager.toggleNodeExpandState(id)
     const tree = this.state.searchModeOn ? this.treeManager.matchTree : this.treeManager.tree
     this.setState({ tree })
@@ -228,7 +228,7 @@ class DropdownTreeSelect extends Component {
     this.keepDropdownActive = false
   }
 
-  onTrigger = e => {
+  onTrigger = (e) => {
     this.handleClick(e, () => {
       // If the dropdown is shown after key press, focus the input
       if (this.state.showDropdown) {
@@ -237,7 +237,7 @@ class DropdownTreeSelect extends Component {
     })
   }
 
-  onKeyboardKeyDown = e => {
+  onKeyboardKeyDown = (e) => {
     const { readOnly, mode, disablePoppingOnBackspace } = this.props
     const { showDropdown, tags, searchModeOn, currentFocus } = this.state
     const tm = this.treeManager
@@ -326,7 +326,7 @@ class DropdownTreeSelect extends Component {
 
     const searchInput = (
       <Input
-        inputRef={el => {
+        inputRef={(el) => {
           this.searchInput = el
         }}
         onInputChange={this.onInputChange}
@@ -343,7 +343,7 @@ class DropdownTreeSelect extends Component {
         className={[this.props.className && this.props.className, 'react-dropdown-tree-select']
           .filter(Boolean)
           .join(' ')}
-        ref={node => {
+        ref={(node) => {
           this.node = node
         }}
       >
