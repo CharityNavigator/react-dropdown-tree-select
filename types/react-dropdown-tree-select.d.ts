@@ -1,5 +1,5 @@
 // tslint:disable:interface-name
-declare module '@sm2dev/react-dropdown-tree-select' {
+declare module '@cn-npm/react-dropdown-tree-select' {
   import * as React from 'react'
 
   export type TreeData = Object | TreeNodeProps[]
