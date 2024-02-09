@@ -93,6 +93,19 @@ class DropdownTreeSelect extends Component {
     })
   }
 
+  propsChanged = (prevProps, nextProps) => {
+    if (prevProps.data && nextProps.data) {
+      if (JSON.stringify(prevProps.data) !== JSON.stringify(nextProps.data)) return true
+    } else if (prevProps.data !== nextProps.data) return true
+
+    if (prevProps.mode !== nextProps.mode) return true
+    if (prevProps.showDropdown !== nextProps.showDropdown) return true
+    if (prevProps.showPartiallySelected !== nextProps.showPartiallySelected) return true
+    if (prevProps.searchPredicate !== nextProps.searchPredicate) return true
+
+    return false
+  }
+
   resetSearchState = () => {
     // clear the search criteria and avoid react controlled/uncontrolled warning
     if (this.searchInput) {
@@ -114,8 +127,11 @@ class DropdownTreeSelect extends Component {
     document.removeEventListener('click', this.handleOutsideClick, false)
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.initNewProps(nextProps)
+  componentDidUpdate(prevProps) {
+    if (this.propsChanged(prevProps, this.props)) {
+      console.log('componentDidUpdate props changed', prevProps, this.props)
+      this.initNewProps(this.props)
+    }
   }
 
   handleClick = (e, callback) => {

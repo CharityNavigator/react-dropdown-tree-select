@@ -1,6 +1,6 @@
 {
   "name": "@cn-npm/react-dropdown-tree-select",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "description": "Lightweight, customizable and fast Dropdown Tree Select component for React",
   "keywords": [
     "react",
@@ -44,7 +44,7 @@
   ],
   "dependencies": {
     "array.partial": "^1.0.5",
-    "react-infinite-scroll-component": "^4.0.2"
+    "react-infinite-scroll-component": "^6.1.0"
   },
   "ava": {
     "files": [

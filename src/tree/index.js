@@ -38,11 +38,36 @@ class Tree extends Component {
     }
   }
 
-  componentWillReceiveProps = nextProps => {
-    const { activeDescendant } = nextProps
-    const hasSameActiveDescendant = activeDescendant === this.props.activeDescendant
-    this.computeInstanceProps(nextProps, !hasSameActiveDescendant)
-    this.setState({ items: this.allVisibleNodes.slice(0, this.currentPage * this.props.pageSize) })
+  propsChanged = (prevProps, nextProps) => {
+    const allVisibleNodes = this.getNodes(this.props)
+    if (allVisibleNodes.length !== this.allVisibleNodes.length) return true
+
+    if (prevProps.data && nextProps.data) {
+      if (JSON.stringify(prevProps.data) !== JSON.stringify(nextProps.data)) return true
+    } else if (prevProps.data !== nextProps.data) return true
+
+    if (prevProps.keepTreeOnSearch !== nextProps.keepTreeOnSearch) return true
+    if (prevProps.keepChildrenOnSearch !== nextProps.keepChildrenOnSearch) return true
+    if (prevProps.searchModeOn !== nextProps.searchModeOn) return true
+    if (prevProps.mode !== nextProps.mode) return true
+    if (prevProps.showPartiallySelected !== nextProps.showPartiallySelected) return true
+    if (prevProps.readOnly !== nextProps.readOnly) return true
+    if (prevProps.activeDescendant !== nextProps.activeDescendant) return true
+    if (prevProps.clientId !== nextProps.clientId) return true
+    if (prevProps.pageSize !== nextProps.pageSize) return true
+
+    return false
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.propsChanged(prevProps, this.props)) {
+      console.log('componentDidUpdate props changed', prevProps, this.props)
+
+      const { activeDescendant } = this.props
+      const hasSameActiveDescendant = activeDescendant === this.props.activeDescendant
+      this.computeInstanceProps(this.props, !hasSameActiveDescendant)
+      this.setState({ items: this.allVisibleNodes.slice(0, this.currentPage * this.props.pageSize) })
+    }
   }
 
   componentDidMount = () => {
@@ -54,7 +79,7 @@ class Tree extends Component {
     this.totalPages = Math.ceil(this.allVisibleNodes.length / this.props.pageSize)
     if (checkActiveDescendant && props.activeDescendant) {
       const currentId = props.activeDescendant.replace(/_li$/, '')
-      let focusIndex = findIndex(this.allVisibleNodes, n => n.key === currentId) + 1
+      let focusIndex = findIndex(this.allVisibleNodes, (n) => n.key === currentId) + 1
       this.currentPage = focusIndex > 0 ? Math.ceil(focusIndex / this.props.pageSize) : 1
     }
   }
@@ -70,7 +95,7 @@ class Tree extends Component {
     return !parent || parent.expanded
   }
 
-  getNodes = props => {
+  getNodes = (props) => {
     const {
       data,
       keepTreeOnSearch,
@@ -87,7 +112,7 @@ class Tree extends Component {
       clientId,
     } = props
     const items = []
-    data.forEach(node => {
+    data.forEach((node) => {
       if (this.shouldRenderNode(node, props)) {
         items.push(
           <TreeNode
@@ -120,7 +145,7 @@ class Tree extends Component {
     this.setState({ items: nextItems })
   }
 
-  setNodeRef = node => {
+  setNodeRef = (node) => {
     this.node = node
   }
 
